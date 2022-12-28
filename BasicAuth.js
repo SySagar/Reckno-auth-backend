@@ -73,6 +73,6 @@ app.get('/auth/github/callback',
     })
     
 
-app.listen(3000, () => {
+app.listen(3000 || process.env.PORT, () => {
     console.log("listening at 3000");
 })
