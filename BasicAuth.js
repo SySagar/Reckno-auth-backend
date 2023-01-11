@@ -7,6 +7,10 @@ require('./GithubAuth');
 const app = express()
 require('dotenv').config()
 
+app.use(cors({
+    origin: '*'
+}));
+
 app.use(cookieSession({
     maxAge: 24*60*60*1000,
     keys: [process.env.COOKIE_KEY] // encrypts the cookie in browser

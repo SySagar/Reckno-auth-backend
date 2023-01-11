@@ -17,13 +17,14 @@ passport.use(new GitHubStrategy({
             if(currentUser)
             {
                 //already have user in db
-                //console.log(profile)
+                console.log(profile.username)
                 console.log('user exists');
                 done(null,currentUser)
             }
             else
             {
               
+                console.log(profile.username)
                  User({
                     username: profile.displayName,
                     id: profile.id,
