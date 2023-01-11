@@ -6,6 +6,7 @@ require('./GoogleAuth');
 require('./GithubAuth');
 const app = express()
 require('dotenv').config()
+var cors = require('cors')
 
 app.use(cors({
     origin: '*'
