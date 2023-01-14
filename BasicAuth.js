@@ -74,8 +74,8 @@ app.get('/auth/github/callback',
     })
     
     app.get('/protected', isLogged, (req, res) => {
-        res.send("hello u have successfully logged in! "+req.user.username);
-        redirect('https://reckno-git-main-sysagar.vercel.app/home/#home')
+        res.send("https://reckno-git-main-sysagar.vercel.app/home/#home");
+        // redirect('https://reckno-git-main-sysagar.vercel.app/home/#home')
         //res.send(`${req.user.displayname}`)
     })
     
