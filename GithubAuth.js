@@ -28,7 +28,8 @@ passport.use(new GitHubStrategy({
                  User({
                     username: profile.displayName,
                     id: profile.id,
-                    email: "null"
+                    email: "null",
+                    group: "not assigned"
                   }).save().then((newUser)=>{
                     //console.log(profile)
                     console.log('new user created '+newUser);

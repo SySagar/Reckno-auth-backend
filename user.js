@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
          required: true},
     email: {type: String},
      id: {type: String},
+     image: {type: String},
+     group:{type: String}
       
 });
 

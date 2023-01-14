@@ -11,12 +11,13 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 passport.use(new GoogleStrategy({
     clientID:     GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://reckno-authentication.onrender.com/google/callback",
+    callbackURL: "http://localhost:3000/google/callback",
     passReqToCallback   : true
   },
   async function(request, accessToken, refreshToken, profile, done) {
 
-    //   console.log(profile)
+     
+          //console.log(profile)
 
     await User.findOne({email: profile.email}).then((currentUser)=>{
         if(currentUser)
@@ -28,11 +29,14 @@ passport.use(new GoogleStrategy({
         }
         else
         {
+
           
              User({
                 username: profile.displayName,
                 email: profile.email,
-                id: "null"
+                image: profile.photos[0].value,
+                id: "null",
+                group: "not assigned"
               }).save().then((newUser)=>{
                 //console.log(profile)
                 console.log('new user created '+newUser);

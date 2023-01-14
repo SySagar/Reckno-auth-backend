@@ -2,11 +2,17 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session')
 const cookieSession = require('cookie-session')
+const bodyParser = require('body-parser')
 require('./GoogleAuth');
 require('./GithubAuth');
+const up = require('./update')
+const ch = require('./check')
 const app = express()
 require('dotenv').config()
 var cors = require('cors')
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use(cors({
     origin: '*'
@@ -76,6 +82,39 @@ app.get('/auth/github/callback',
         req.logOut();
         res.send('Goodbye!');
     })
+
+    app.post('/dataset',async (req,res)=>{
+
+        await User.findOne({email: req.email}).then((currentUser)=>{
+            if(currentUser)
+            {
+                
+                console.log('user exists');
+               console.log(currentUser)
+            }
+
+            else
+            res.send(404)
+
+    })
+})
+
+app.post('/group', async(req,res)=>{
+
+   console.log(req.body.group)
+    up.update(req.body.userName , req.body.group , (data)=>{
+        res.send(data)
+    })
+
+})
+
+app.post('/check',(req,res)=>{
+    console.log(req.body.userName)
+    ch.check(req.body.userName,(data)=>{
+        res.send(data)
+
+    })
+})
     
 
 app.listen(3000 || process.env.PORT, () => {
