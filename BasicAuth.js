@@ -75,6 +75,7 @@ app.get('/auth/github/callback',
     
     app.get('/protected', isLogged, (req, res) => {
         res.send("hello u have successfully logged in! "+req.user.username);
+        redirect('http://localhost:3000/home/#home')
         //res.send(`${req.user.displayname}`)
     })
     
