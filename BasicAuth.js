@@ -75,7 +75,7 @@ app.get('/auth/github/callback',
     
     app.get('/protected', isLogged, (req, res) => {
         res.send("hello u have successfully logged in! "+req.user.username);
-        redirect('http://localhost:3000/home/#home')
+        redirect('https://reckno-git-main-sysagar.vercel.app/home/#home')
         //res.send(`${req.user.displayname}`)
     })
     
@@ -119,5 +119,5 @@ app.post('/check',(req,res)=>{
     
 
 app.listen(3000 || process.env.PORT, () => {
-    console.log("listening at 3000");
+    console.log("listening");
 })
