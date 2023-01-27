@@ -11,6 +11,8 @@ const app = express()
 require('dotenv').config()
 var cors = require('cors')
 
+const User = require('./user');
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
@@ -75,8 +77,7 @@ app.get('/auth/github/callback',
     
     app.get('/protected', isLogged, (req, res) => {
         res.redirect("https://reckno-git-main-sysagar.vercel.app/home/#home");
-        //  redirect('https://reckno-git-main-sysagar.vercel.app/home/#home')
-        //res.send(`${req.user.displayname}`)
+      
     })
     
     app.get('/logout', (req, res) => {
@@ -86,21 +87,38 @@ app.get('/auth/github/callback',
 
     app.post('/dataset',async (req,res)=>{
 
-        await User.findOne({email: req.email}).then((currentUser)=>{
+        await User.findOne({username: req.username}).then((currentUser)=>{
             if(currentUser)
             {
                 
                 console.log('user exists');
                console.log(currentUser)
+               res.send(User.group)
             }
 
             else
-            res.send(404)
+            {
+                User({
+                    username: profile.displayName,
+                    email: profile.email,
+                    image: './guest.jpg',
+                    id: "null",
+                    group: "not assigned"
+                  }).save().then((newUser)=>{
+                    //console.log(profile)
+                    console.log('new user created '+newUser);
+                  })
+            }
 
     })
 })
 
-app.post('/group', async(req,res)=>{
+
+app.get('/dataset',async (req,res)=>{
+    res.send(User.group)
+})
+
+app.put('/group', async(req,res)=>{
 
    console.log(req.body.group)
     up.update(req.body.userName , req.body.group , (data)=>{
