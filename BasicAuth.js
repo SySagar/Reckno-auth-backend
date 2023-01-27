@@ -30,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const mongoose = require('mongoose');
-const User = require('./user');
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.DB_URI,()=>{
     console.log("connected to mongodb");
