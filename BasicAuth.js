@@ -81,12 +81,19 @@ app.get('/auth/github/callback',
     
 
     app.post('/logout', function(req, res, next){
-        req.logout(function(err) {
-          if (err) { return next(err); }
-          res.header( "Access-Control-Allow-Origin" );
-          console.log("user has been loged out")
-          res.redirect("https://reckno-git-main-sysagar.vercel.app/");
-        });
+        // req.logout(function(err) {
+        //   if (err) { return next(err); }
+          
+        // });
+
+        req.session.destroy(function (err) {
+
+            if (err) { return next(err);}
+
+            res.header( "Access-Control-Allow-Origin" );
+            console.log("user has been loged out")
+            res.redirect("https://reckno-git-main-sysagar.vercel.app/");
+          });
       });
 
     app.post('/dataset',async (req,res)=>{
