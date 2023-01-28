@@ -81,6 +81,7 @@ app.get('/auth/github/callback',
     
     app.get('/logout', (req, res) => {
         req.logOut();
+        console.log("user has been loged out")
         res.redirect("https://reckno-git-main-sysagar.vercel.app/");
     })
 
@@ -97,7 +98,7 @@ app.get('/auth/github/callback',
 
             else
             {
-               res.redirect('https://reckno-git-main-sysagar.vercel.app/signup');
+               res.redirect('https://reckno-git-main-sysagar.vercel.app/signup/');
             }
 
     })
