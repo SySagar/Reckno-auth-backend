@@ -106,7 +106,7 @@ app.get('/auth/github/callback',
 app.post('/signup',async (req,res)=>{
 
     User({
-        username: req.displayName,
+        username: req.username,
         email: req.email,
         image: './guest.jpg',
         id: "null",
