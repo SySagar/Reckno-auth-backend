@@ -80,7 +80,7 @@ app.get('/auth/github/callback',
     })
     
 
-    app.post('/logout', function(req, res, next){
+    app.get('/logout', function(req, res, next){
         // req.logout(function(err) {
         //   if (err) { return next(err); }
           
