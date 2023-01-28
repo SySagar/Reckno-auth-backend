@@ -81,7 +81,7 @@ app.get('/auth/github/callback',
     
     app.get('/logout', (req, res) => {
         req.logOut();
-        res.send('Goodbye!');
+        res.redirect("https://reckno-git-main-sysagar.vercel.app/");
     })
 
     app.post('/dataset',async (req,res)=>{
@@ -97,25 +97,41 @@ app.get('/auth/github/callback',
 
             else
             {
-                User({
-                    username: profile.displayName,
-                    email: profile.email,
-                    image: './guest.jpg',
-                    id: "null",
-                    group: "not assigned"
-                  }).save().then((newUser)=>{
-                    //console.log(profile)
-                    console.log('new user created '+newUser);
-                  })
+               res.redirect('https://reckno-git-main-sysagar.vercel.app/signup');
             }
 
     })
 })
 
+app.post('/signup',async (req,res)=>{
 
-app.get('/dataset',async (req,res)=>{
-    res.send(User.group)
+    User({
+        username: req.displayName,
+        email: req.email,
+        image: './guest.jpg',
+        id: "null",
+        group: "not assigned"
+      }).save().then((newUser)=>{
+        //console.log(profile)
+        console.log('new user created '+newUser);
+      })
+    
 })
+
+
+// app.get('/dataset',async (req,res)=>{
+//     await User.findOne({username: req.username}).then((currentUser)=>{
+//         if(currentUser)
+//         {
+            
+//             console.log('user exists');
+//            console.log(currentUser)
+//            res.send(User.group)
+//         }
+//     }
+//     )
+
+// })
 
 app.put('/group', async(req,res)=>{
 
