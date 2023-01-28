@@ -82,7 +82,8 @@ app.get('/auth/github/callback',
 
     app.get('/logout', function(req, res, next){
         req.logOut(function(err) {
-          if (err) { return next(err); }
+          if (err) {
+            console.log(err); return next(err); }
           res.header( "Access-Control-Allow-Origin" );
           console.log("user has been loged out")
           res.redirect("https://reckno-git-main-sysagar.vercel.app/");
