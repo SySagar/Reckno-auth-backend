@@ -79,11 +79,14 @@ app.get('/auth/github/callback',
       
     })
     
-    app.get('/logout', (req, res) => {
-        req.logOut();
-        console.log("user has been loged out")
-        res.redirect("https://reckno-git-main-sysagar.vercel.app/");
-    })
+
+    app.post('/logout', function(req, res, next){
+        req.logout(function(err) {
+          if (err) { return next(err); }
+          console.log("user has been loged out")
+          res.redirect("https://reckno-git-main-sysagar.vercel.app/");
+        });
+      });
 
     app.post('/dataset',async (req,res)=>{
 
