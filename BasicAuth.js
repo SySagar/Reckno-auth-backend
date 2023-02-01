@@ -84,7 +84,10 @@ app.get('/auth/github/callback',
         req.logOut(function(err) {
           if (err) {
             console.log(err); return next(err); }
-          res.header( "Access-Control-Allow-Origin" );
+            res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
           console.log("user has been loged out")
           res.redirect("https://reckno-git-main-sysagar.vercel.app/");
         });
@@ -105,7 +108,12 @@ app.get('/auth/github/callback',
 
             else
             {
-                res.header( "Access-Control-Allow-Origin" );
+
+                res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+         
                res.redirect('https://reckno-git-main-sysagar.vercel.app/signup/');
             }
 
@@ -146,6 +154,11 @@ app.put('/group', async(req,res)=>{
 
    console.log(req.body.group)
     up.update(req.body.userName , req.body.group , (data)=>{
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+         
         res.send(data)
     })
 
@@ -154,6 +167,11 @@ app.put('/group', async(req,res)=>{
 app.post('/check',(req,res)=>{
     console.log(req.body.userName)
     ch.check(req.body.userName,(data)=>{
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+            res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+         
         res.send(data)
 
     })
